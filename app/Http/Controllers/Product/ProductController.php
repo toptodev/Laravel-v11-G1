@@ -15,7 +15,7 @@ class ProductController extends Controller
   {
     $products = $this->products();
 
-    return view('products.index', compact('products'));
+    return view('product.index', compact('products'));
   }
 
   /**
@@ -41,7 +41,7 @@ class ProductController extends Controller
   {
     $product = $this->products($id);
 
-    return view('products.show', compact('product'));
+    return view('product.show', compact('product'));
   }
 
   /**
