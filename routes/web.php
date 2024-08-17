@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Login\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
+
+Route::get('admin', [AdminController::class, 'index']);
