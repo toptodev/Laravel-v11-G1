@@ -211,7 +211,6 @@
 				</ul>
 		</div>
 
-
 		<svg class="d-none"
 				xmlns="http://www.w3.org/2000/svg">
 				<symbol fill="none"
@@ -238,6 +237,7 @@
 				</symbol>
 		</svg>
 
+		{{-- top menu --}}
 		<nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom"
 				data-bs-theme="dark">
 				<div class="container">
@@ -307,108 +307,10 @@
 		</nav>
 
 		<main>
-				<div class="position-relative p-md-5 m-md-3 bg-body-tertiary overflow-hidden p-3 text-center">
-						<div class="col-md-6 p-lg-5 mx-auto my-5">
-								<h1 class="display-3 fw-bold">Designed for engineers</h1>
-								<h3 class="fw-normal text-muted mb-3">Build anything you want with Aperture</h3>
-								<div class="d-flex justify-content-center lead fw-normal gap-3">
-										<a class="icon-link"
-												href="#">
-												Learn more
-												<svg class="bi">
-														<use xlink:href="#chevron-right" />
-												</svg>
-										</a>
-										<a class="icon-link"
-												href="#">
-												Buy
-												<svg class="bi">
-														<use xlink:href="#chevron-right" />
-												</svg>
-										</a>
-								</div>
-						</div>
-						<div class="product-device d-none d-md-block shadow-sm"></div>
-						<div class="product-device product-device-2 d-none d-md-block shadow-sm"></div>
-				</div>
-
-				<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-						<div class="text-bg-dark me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 py-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-body-tertiary mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-						<div class="bg-body-tertiary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 p-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-dark mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-				</div>
-
-				<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-						<div class="bg-body-tertiary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 p-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-dark mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-						<div class="text-bg-primary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 py-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-body-tertiary mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-				</div>
-
-				<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-						<div class="bg-body-tertiary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 p-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-body mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-						<div class="bg-body-tertiary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 py-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-body mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-				</div>
-
-				<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-						<div class="bg-body-tertiary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 p-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-body mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-						<div class="bg-body-tertiary me-md-3 pt-md-5 px-md-5 overflow-hidden px-3 pt-3 text-center">
-								<div class="my-3 py-3">
-										<h2 class="display-5">Another headline</h2>
-										<p class="lead">And an even wittier subheading.</p>
-								</div>
-								<div class="bg-body mx-auto shadow-sm"
-										style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-						</div>
-				</div>
+				@yield('app-content')
 		</main>
 
+		{{-- footer --}}
 		<footer class="container py-5">
 				<div class="row">
 						<div class="col-12 col-md">
@@ -489,6 +391,7 @@
 						</div>
 				</div>
 		</footer>
+
 		<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
