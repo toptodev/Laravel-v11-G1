@@ -20,7 +20,7 @@ class ProductController extends Controller
    */
   public function create()
   {
-    //
+    return view('product.admin.create');
   }
 
   /**
@@ -28,7 +28,20 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate(
+      [
+        'title'  => 'required|string',
+        'cover' => 'required|image|max:3072|mimes:jpg,jpeg,png,webp'
+      ],
+      [
+        'title.required' => 'โปรดระบุชื่อสินค้า',
+        'cover.required' => 'โปรดแนบรูปภาพหน้าปก',
+        'cover.max' => 'ภาพหน้าต้องมีขนาดไม่เกิน 3 MB',
+        'cover.mimes' => 'ภาพหน้าปกต้องมีนามสกุล *.jpg, *.jpeg, *.png',
+      ]
+    );
+
+    return $request->all();
   }
 
   /**
@@ -52,7 +65,14 @@ class ProductController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    //
+    $validated = $request->validate(
+      [
+        'title'  => 'required|string',
+      ],
+      [
+        'title.required' => 'โปรดระบุชื่อสินค้า',
+      ]
+    );
   }
 
   /**

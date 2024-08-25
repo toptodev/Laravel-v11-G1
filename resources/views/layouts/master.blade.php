@@ -14,101 +14,18 @@
 				name="author">
 		<meta content="Hugo 0.122.0"
 				name="generator">
-		<title>Product example · Bootstrap v5.3</title>
-
-		<link href="https://getbootstrap.com/docs/5.3/examples/product/"
-				rel="canonical">
-
-		<link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+		<title>ranprajum (ร้านประจำ)</title>
+		<link href="{{ asset('assets/plugins/node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
 				rel="stylesheet">
-
-		<link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}"
-				rel="stylesheet">
-		<link href="{{ asset('assets/plugins/bootstrap-icons/font/bootstrap-icons.min.css') }}"
-				rel="stylesheet">
-
-		<style>
-				.bd-placeholder-img {
-						font-size: 1.125rem;
-						text-anchor: middle;
-						-webkit-user-select: none;
-						-moz-user-select: none;
-						user-select: none;
-				}
-
-				@media (min-width: 768px) {
-						.bd-placeholder-img-lg {
-								font-size: 3.5rem;
-						}
-				}
-
-				.b-example-divider {
-						width: 100%;
-						height: 3rem;
-						background-color: rgba(0, 0, 0, .1);
-						border: solid rgba(0, 0, 0, .15);
-						border-width: 1px 0;
-						box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-				}
-
-				.b-example-vr {
-						flex-shrink: 0;
-						width: 1.5rem;
-						height: 100vh;
-				}
-
-				.bi {
-						vertical-align: -.125em;
-						fill: currentColor;
-				}
-
-				.nav-scroller {
-						position: relative;
-						z-index: 2;
-						height: 2.75rem;
-						overflow-y: hidden;
-				}
-
-				.nav-scroller .nav {
-						display: flex;
-						flex-wrap: nowrap;
-						padding-bottom: 1rem;
-						margin-top: -1px;
-						overflow-x: auto;
-						text-align: center;
-						white-space: nowrap;
-						-webkit-overflow-scrolling: touch;
-				}
-
-				.btn-bd-primary {
-						--bd-violet-bg: #712cf9;
-						--bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-						--bs-btn-font-weight: 600;
-						--bs-btn-color: var(--bs-white);
-						--bs-btn-bg: var(--bd-violet-bg);
-						--bs-btn-border-color: var(--bd-violet-bg);
-						--bs-btn-hover-color: var(--bs-white);
-						--bs-btn-hover-bg: #6528e0;
-						--bs-btn-hover-border-color: #6528e0;
-						--bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-						--bs-btn-active-color: var(--bs-btn-hover-color);
-						--bs-btn-active-bg: #5a23c8;
-						--bs-btn-active-border-color: #5a23c8;
-				}
-
-				.bd-mode-toggle {
-						z-index: 1500;
-				}
-
-				.bd-mode-toggle .dropdown-menu .active .bi {
-						display: block !important;
-				}
-		</style>
-
-
+		<!-- Font-icon css-->
+		<link href="{{ asset('assets/plugins/node_modules/bootstrap-icons/font/bootstrap-icons.css') }}"
+				rel="stylesheet"
+				type="text/css">
+		<link href="{{ asset('assets/plugins/node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}"
+				rel="stylesheet"
+				type="text/css">
 		<!-- Custom styles for this template -->
-		<link href="{{ asset('assets/common/css/product.css') }}"
+		<link href="{{ asset('assets/common/css/style.css') }}"
 				rel="stylesheet">
 </head>
 
@@ -272,34 +189,52 @@
 								</div>
 								<div class="offcanvas-body">
 										<ul class="navbar-nav flex-grow-1 justify-content-between">
-												<li class="nav-item"><a class="nav-link"
+												<li class="nav-item">
+														<a class="nav-link"
 																href="#">
 																<svg class="bi"
 																		height="24"
 																		width="24">
 																		<use xlink:href="#aperture" />
 																</svg>
-														</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">Tour</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">Product</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">Features</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">Enterprise</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">Support</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">Pricing</a></li>
-												<li class="nav-item"><a class="nav-link"
-																href="#">
+														</a>
+												</li>
+										</ul>
+										<ul class="navbar-nav flex-grow-1 justify-content-end">
+												<li class="nav-item">
+														<a class="nav-link"
+																href="{{ url('/') }}">หน้าแรก</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link"
+																href="{{ route('products.index') }}">สินค้าทั้งหมด</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link"
+																href="#">Features</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link"
+																href="#">Enterprise</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link"
+																href="#">ติดต่อเรา</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link"
+																href="#">Pricing</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link"
+																href="{{ route('carts.index') }}">
 																<svg class="bi"
 																		height="24"
 																		width="24">
 																		<use xlink:href="#cart" />
 																</svg>
-														</a></li>
+														</a>
+												</li>
 										</ul>
 								</div>
 						</div>
@@ -311,7 +246,7 @@
 		</main>
 
 		{{-- footer --}}
-		<footer class="container py-5">
+		<footer class="container py-5 mt-5 border-top">
 				<div class="row">
 						<div class="col-12 col-md">
 								<svg class="d-block mb-2"
@@ -332,6 +267,9 @@
 										<path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
 								</svg>
 								<small class="d-block text-body-secondary mb-3">&copy; 2017–2024</small>
+								<small class="d-block text-body-secondary mb-3">
+										Laravel v{{ Illuminate\Foundation\Application::VERSION }} <br />(PHP v{{ PHP_VERSION }})
+								</small>
 						</div>
 						<div class="col-6 col-md">
 								<h5>Features</h5>
@@ -392,7 +330,7 @@
 				</div>
 		</footer>
 
-		<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 

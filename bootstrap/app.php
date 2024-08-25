@@ -8,6 +8,7 @@ use Illuminate\Routing\Router;
 return Application::configure(basePath: dirname(__DIR__))
   ->withRouting(
     function (Router $router) {
+      $router->middleware('web')->group(base_path('routes/auth.php'));
       $router->middleware('web')->group(base_path('routes/web.php'));
       $router->middleware('web')->group(base_path('routes/product.php'));
     },

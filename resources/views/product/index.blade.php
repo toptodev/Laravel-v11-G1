@@ -1,28 +1,15 @@
 @extends('layouts.master')
 
 @section('app-content')
-		<div class="product bg-body-tertiary py-5">
+		<div class="product py-5">
 				<div class="container">
-						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 								@for ($i = 1; $i <= 12; $i++)
 										<div class="col">
 												<div class="card shadow-sm">
-														<svg aria-label="Placeholder: Thumbnail"
-																class="bd-placeholder-img card-img-top"
-																focusable="false"
-																height="225"
-																preserveAspectRatio="xMidYMid slice"
-																role="img"
-																width="100%"
-																xmlns="http://www.w3.org/2000/svg">
-																<title>Placeholder</title>
-																<rect fill="#55595c"
-																		height="100%"
-																		width="100%"></rect><text dy=".3em"
-																		fill="#eceeef"
-																		x="50%"
-																		y="50%">Thumbnail</text>
-														</svg>
+														<img alt="{{ Request::getHost() }}"
+																class="img-fluid"
+																src="https://placehold.co/600x400">
 														<div class="card-body">
 																<div class="card-title fw-bolder">
 																		<a class="text-decoration-none text-dark"
