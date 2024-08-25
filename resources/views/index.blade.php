@@ -97,7 +97,6 @@
 								<span class="highlight-primary">สินค้า</span>แนะนำ
 						</h1>
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-								{{-- @for ($i = 0; $i < 8; $i++) --}}
 								@foreach ($products as $product)
 										<div class="col">
 												<div class="card product-box shadow-sm">
@@ -107,7 +106,7 @@
 														<div class="card-body">
 																<div class="card-title fw-bolder">
 																		<a class="text-decoration-none text-dark"
-																				href="{{ route('products.show', 1) }}">
+																				href="{{ route('products.show', $product->id) }}">
 																				{{ $product->title }}
 																		</a>
 																</div>

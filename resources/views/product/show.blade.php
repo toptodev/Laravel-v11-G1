@@ -4,11 +4,21 @@
 		<section class="page-contents">
 				<div class="page-header mt-5">
 						<div class="container">
+
+								<nav aria-label="breadcrumb">
+										<ol class="breadcrumb">
+												<li class="breadcrumb-item"><a href="{{ route('index') }}">หน้าแรก</a></li>
+												<li class="breadcrumb-item"><a href="{{ route('products.index') }}">สินค้าทั้งหมด</a></li>
+												<li aria-current="page"
+														class="breadcrumb-item active">{{ $product->title }}</li>
+										</ol>
+								</nav>
+
 								<div class="row justify-content-center">
 										<div class="col-sm-12">
-												<h2>Notebook Asus E410MA-EKP11W</h2>
+												<h2>{{ $product->title }}</h2>
 												<div class="text-muted">
-														AX006
+														{{ $product->category }}
 												</div>
 										</div>
 								</div>
@@ -21,56 +31,36 @@
 										<div class="col-sm-12 col-md-12">
 												<div class="py-5">
 														<p class="text-center">
-																<img alt="taksininfotech.net"
-																		class="img-fluid"
-																		src="http://taksininfotech.net/storage/product/9-45c48cce2e2d7fbdea1afc51c7c6ad26/crop/Untitled-3_63686d76e8cf2.png">
+																<img class="img-fluid"
+																		src="https://placehold.co/600x400">
 														</p>
-														<table class="table-bordered table-striped table">
-																<tbody>
-																		<tr>
-																				<td width="200">Brand</td>
-																				<td>N/A</td>
-																		</tr>
-																		<tr>
-																				<td>Model</td>
-																				<td>N/A</td>
-																		</tr>
-																		<tr>
-																				<td>Other</td>
-																				<td>N/A</td>
-																		</tr>
-																		<tr>
-																				<td>Package Contents</td>
-																				<td>N/A</td>
-																		</tr>
-																		<tr>
-																				<td>Warranty</td>
-																				<td>N/A</td>
-																		</tr>
-																		<tr>
-																				<td>Dimension</td>
-																				<td>N/A</td>
-																		</tr>
-																		<tr>
-																				<td>Net Weight</td>
-																				<td>N/A</td>
-																		</tr>
-																</tbody>
+														<table class="table-striped table">
+																<tr>
+																		<td width="200">รหัสสินค้า</td>
+																		<td>{{ $product->code }}</td>
+																</tr>
+																<tr>
+																		<td>ชื่อสินค้า</td>
+																		<td>{{ $product->title }}</td>
+																</tr>
+																<tr>
+																		<td>ราคาจริง</td>
+																		<td>{{ $product->price_actual }}</td>
+																</tr>
+																<tr>
+																		<td>ราคาขาย</td>
+																		<td>{{ $product->price }}</td>
+																</tr>
+																<tr>
+																		<td>รายละเอียด</td>
+																		<td>{{ $product->detail }}</td>
+																</tr>
 														</table>
 												</div>
 												<div class="d-flex justify-content-center pb-3">
-														<a class="btn btn-lg btn-outline-primary"
-																href="http://taksininfotech.net/order/add-to-cart/9">
+														<a class="btn btn-lg btn-outline-primary">
 																<i class="fas fa-cart-plus"></i> หยิบใส่ตะกร้า
 														</a>
-												</div>
-										</div>
-								</div>
-
-								<div class="row justify-content-center">
-										<div class="col-md-12 py-5">
-												<div class="row"
-														id="lightgallery">
 												</div>
 										</div>
 								</div>

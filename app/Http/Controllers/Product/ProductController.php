@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -12,7 +13,9 @@ class ProductController extends Controller
    */
   public function index()
   {
-    return view('product.index');
+    $products = Product::orderByDesc('id')->paginate(20);
+
+    return view('product.index', compact('products'));
   }
 
   /**
@@ -20,7 +23,8 @@ class ProductController extends Controller
    */
   public function show(string $id)
   {
+    $product = Product::findOrFail($id);
 
-    return view('product.show');
+    return view('product.show', compact('product'));
   }
 }
