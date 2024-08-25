@@ -18,6 +18,9 @@
 																		placeholder="ระบุรหัสสินค้า"
 																		type="text"
 																		value="{{ old('code') ?? '' }}">
+																@error('code')
+																		<p class="invalid-feedback">{{ $message }}</p>
+																@enderror
 														</div>
 														<div class="col-md-5 mb-2">
 																<label>ชื่อสินค้า</label>
@@ -26,6 +29,9 @@
 																		placeholder="ระบุชื่อสินค้า"
 																		type="text"
 																		value="{{ old('title') ?? '' }}">
+																@error('title')
+																		<p class="invalid-feedback">{{ $message }}</p>
+																@enderror
 														</div>
 														<div class="col-md-4 mb-2">
 																<label>หน้าปก</label>
@@ -43,6 +49,9 @@
 																		placeholder="ระบุจำนวน"
 																		type="number"
 																		value="{{ old('price_actual') ?? '' }}">
+																@error('price_actual')
+																		<p class="invalid-feedback">{{ $message }}</p>
+																@enderror
 														</div>
 														<div class="col-md-2 mb-2">
 																<label>ราคาขาย</label>
@@ -51,6 +60,9 @@
 																		placeholder="ระบุจำนวน"
 																		type="number"
 																		value="{{ old('price') ?? '' }}">
+																@error('price')
+																		<p class="invalid-feedback">{{ $message }}</p>
+																@enderror
 														</div>
 														<div class="col-md-4 mb-2">
 																<label>ประเภท</label>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,7 +13,9 @@ class ProductController extends Controller
    */
   public function index()
   {
-    return view('product.admin.index');
+    $products = Product::orderByDesc('id')->paginate(20);
+
+    return view('product.admin.index', compact('products'));
   }
 
   /**
@@ -28,20 +31,31 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
+
     $validated = $request->validate(
       [
-        'title'  => 'required|string',
-        'cover' => 'required|image|max:3072|mimes:jpg,jpeg,png,webp'
+        "code" => 'required|string',
+        "title" => 'required|string',
+        "price_actual" => 'required|string',
+        "price" => 'required|string',
+
+        // 'cover' => 'required|image|max:3072|mimes:jpg,jpeg,png,webp'
       ],
       [
+        'code.required' => 'โปรดระบุรหัสสินค้า',
         'title.required' => 'โปรดระบุชื่อสินค้า',
-        'cover.required' => 'โปรดแนบรูปภาพหน้าปก',
-        'cover.max' => 'ภาพหน้าต้องมีขนาดไม่เกิน 3 MB',
-        'cover.mimes' => 'ภาพหน้าปกต้องมีนามสกุล *.jpg, *.jpeg, *.png',
+        'price_actual.required' => 'โปรดระบุราคาจริง',
+        'price.required' => 'โปรดระบุราคาขาย',
+
+        // 'cover.required' => 'โปรดแนบรูปภาพหน้าปก',
+        // 'cover.max' => 'ภาพหน้าต้องมีขนาดไม่เกิน 3 MB',
+        // 'cover.mimes' => 'ภาพหน้าปกต้องมีนามสกุล *.jpg, *.jpeg, *.png',
       ]
     );
 
-    return $request->all();
+    Product::create($request->all());
+
+    return redirect()->route('admin.products.index');
   }
 
   /**
@@ -57,7 +71,9 @@ class ProductController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $product = Product::findOrFail($id);
+
+    return view('product.admin.edit', compact('product'));
   }
 
   /**
@@ -67,12 +83,28 @@ class ProductController extends Controller
   {
     $validated = $request->validate(
       [
-        'title'  => 'required|string',
+        "code" => 'required|string',
+        "title" => 'required|string',
+        "price_actual" => 'required|string',
+        "price" => 'required|string',
+
+        // 'cover' => 'required|image|max:3072|mimes:jpg,jpeg,png,webp'
       ],
       [
+        'code.required' => 'โปรดระบุรหัสสินค้า',
         'title.required' => 'โปรดระบุชื่อสินค้า',
+        'price_actual.required' => 'โปรดระบุราคาจริง',
+        'price.required' => 'โปรดระบุราคาขาย',
+
+        // 'cover.required' => 'โปรดแนบรูปภาพหน้าปก',
+        // 'cover.max' => 'ภาพหน้าต้องมีขนาดไม่เกิน 3 MB',
+        // 'cover.mimes' => 'ภาพหน้าปกต้องมีนามสกุล *.jpg, *.jpeg, *.png',
       ]
     );
+
+    Product::findOrFail($id)->update($request->all());
+
+    return redirect()->route('admin.products.index');
   }
 
   /**
@@ -80,6 +112,8 @@ class ProductController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    Product::findOrFail($id)->delete();
+
+    return redirect()->route('admin.products.index');
   }
 }

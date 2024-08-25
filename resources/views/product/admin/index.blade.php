@@ -39,7 +39,7 @@
 												</tr>
 										</thead>
 										<tbody>
-												{{-- @foreach ($lists as $index => $value)
+												@foreach ($products as $index => $product)
 														<tr>
 																<th scope="row"
 																		width="1">
@@ -47,23 +47,23 @@
 																				<label class="form-check-label">
 																						<input class="form-check-input checked"
 																								type="checkbox"
-																								value="{{ $value->id }}">
+																								value="{{ $product->id }}">
 																				</label>
 																		</div>
 																</th>
 																<th scope="row"
-																		width="1">{{ $lists->firstItem() + $index }}</th>
+																		width="1">{{ $products->firstItem() + $index }}</th>
 																<td class="text-nowrap"
-																		width="100">{{ $value->code }}</td>
-																<td class="text-nowrap">{{ $value->name }}</td>
+																		width="100">{{ $product->code }}</td>
+																<td class="text-nowrap">{{ $product->title }}</td>
 																<td class="text-nowrap"
-																		width="100">{{ $value->created_at }}</td>
+																		width="100">{{ $product->created_at }}</td>
 																<td width="1">
-																		<div class="option-link">
-																				<form action="{{ route('admin.products.destroy', $value->id) }}"
+																		<div class="option-link text-nowrap">
+																				<form action="{{ route('admin.products.destroy', $product->id) }}"
 																						method="POST">
 																						<a class="btn btn-sm btn-info"
-																								href="{{ route('admin.products.edit', [$value->id]) }}"> แก้ไข</a>
+																								href="{{ route('admin.products.edit', [$product->id]) }}"> แก้ไข</a>
 																						@csrf
 																						{{ method_field('DELETE') }}
 																						<button class="btn btn-sm btn-danger"
@@ -74,13 +74,13 @@
 																		</div>
 																</td>
 														</tr>
-												@endforeach --}}
+												@endforeach
 										</tbody>
 								</table>
 						</div>
 				</div>
 				<div class="tile-footer">
-						{{-- {{ $lists->render() }} --}}
+						{{ $products->render() }}
 				</div>
 		</div>
 @endsection
@@ -103,7 +103,7 @@
 								});
 
 								if (vals.length > 0) {
-										var uri = `card/print?id=${vals.join()}`;
+										var uri = `url?id=${vals.join()}`;
 										$('.btn-card-print').attr('href', `${uri}`);
 								}
 						});
@@ -119,7 +119,7 @@
 								}
 
 								if (vals.length > 0) {
-										var uri = `card/print?id=${vals.join()}`;
+										var uri = `url?id=${vals.join()}`;
 										$('.btn-card-print').attr('href', `${uri}`);
 								}
 						});
