@@ -9,11 +9,7 @@ class HomeController extends Controller
 {
   public function index()
   {
-    // $products = \DB::table('products')->get();
-    // dd($products);
-
-    $data['products'] = Product::all();
-    // dd($products);
+    $data['products'] = Product::where('types', 1)->limit(8)->get();
 
     return view('index', $data);
   }

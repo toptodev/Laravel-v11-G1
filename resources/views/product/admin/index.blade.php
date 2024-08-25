@@ -62,6 +62,8 @@
 																		<div class="option-link text-nowrap">
 																				<form action="{{ route('admin.products.destroy', $product->id) }}"
 																						method="POST">
+																						<a class="btn btn-sm btn-warning"
+																								href="{{ route('admin.products.show', [$product->id]) }}"> ดูเพิ่มเติม</a>
 																						<a class="btn btn-sm btn-info"
 																								href="{{ route('admin.products.edit', [$product->id]) }}"> แก้ไข</a>
 																						@csrf
