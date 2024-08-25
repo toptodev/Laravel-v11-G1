@@ -97,7 +97,8 @@
 								<span class="highlight-primary">สินค้า</span>แนะนำ
 						</h1>
 						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-								@for ($i = 0; $i < 8; $i++)
+								{{-- @for ($i = 0; $i < 8; $i++) --}}
+								@foreach ($products as $product)
 										<div class="col">
 												<div class="card product-box shadow-sm">
 														<img alt="{{ Request::getHost() }}"
@@ -107,7 +108,7 @@
 																<div class="card-title fw-bolder">
 																		<a class="text-decoration-none text-dark"
 																				href="{{ route('products.show', 1) }}">
-																				Fugiat ea do et nostrud veniam veniam id.
+																				{{ $product->title }}
 																		</a>
 																</div>
 																<p class="card-text">
@@ -115,8 +116,8 @@
 																</p>
 																<div class="d-flex justify-content-between align-items-center">
 																		<div class="text-price">
-																				<h4 class="m-0 p-0">฿{{ number_format(200) }} </h4>
-																				<del>฿{{ number_format(850) }} </del>
+																				<h4 class="m-0 p-0">฿{{ number_format($product->price) }} </h4>
+																				<del class="text-danger">฿{{ number_format($product->price_actual) }} </del>
 																		</div>
 																		<a class="btn btn-sm btn-outline-primary"
 																				href="#">
@@ -126,43 +127,7 @@
 														</div>
 												</div>
 										</div>
-								@endfor
-
-								{{-- @foreach ($products as $value)
-										<div class="col">
-												<div class="card product-box shadow-sm">
-														<img alt="{{ Request::getHost() }}"
-																class="img-fluid"
-																src="{{ Storage::url('product/' . gen_folder($value->id) . '/crop/' . $value->cover) }}">
-														<div class="card-body">
-																<div class="card-title fw-bolder">
-																		<a class="text-decoration-none text-dark"
-																				href="{{ route('product.show', $value->slug) }}">
-																				{{ $value->title }}
-																		</a>
-																</div>
-																<p class="card-text">
-																		@if (in_array(1, $value->types_arr))
-																				<small class="badge fw-light rounded-pill bg-success p-1">สินค้าแนะนำ</small>
-																		@endif
-																		@if (in_array(3, $value->types_arr))
-																				<small class="badge fw-light rounded-pill bg-warning p-1">สินค้าที่ได้รับความนิยม</small>
-																		@endif
-																</p>
-																<div class="d-flex justify-content-between align-items-center">
-																		<div class="text-price">
-																				<h4 class="m-0 p-0">฿{{ number_format($value->price) }} </h4>
-																				<del>฿{{ number_format($value->price_actual) }} </del>
-																		</div>
-																		<a class="btn btn-sm btn-outline-primary"
-																				href="{{ route('order.addToCart', $value->id) }}">
-																				<i class="fas fa-cart-plus"></i>
-																		</a>
-																</div>
-														</div>
-												</div>
-										</div>
-								@endforeach --}}
+								@endforeach
 						</div>
 
 						<div class="row my-5">
