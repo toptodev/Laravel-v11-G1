@@ -41,25 +41,34 @@
 																		name="cover"
 																		type="file">
 																<small class="form-text text-muted">ขนาดรูปภาพที่เหมาะสม 440 x 440 pixel (กว้าง x สูง)</small>
+																@error('cover')
+																		<p class="invalid-feedback">{{ $message }}</p>
+																@enderror
 														</div>
 														<div class="col-md-2 mb-2">
 																<label>ราคาจริง</label>
-																<input class="form-control @error('price_actual') is-invalid @enderror"
-																		name="price_actual"
-																		placeholder="ระบุจำนวน"
-																		type="number"
-																		value="{{ old('price_actual') ?? '' }}">
+																<div class="input-group">
+																		<span class="input-group-text">$</span>
+																		<input class="form-control @error('price_actual') is-invalid @enderror"
+																				name="price_actual"
+																				placeholder="ระบุจำนวน"
+																				type="number"
+																				value="{{ old('price_actual') ?? '' }}">
+																</div>
 																@error('price_actual')
 																		<p class="invalid-feedback">{{ $message }}</p>
 																@enderror
 														</div>
 														<div class="col-md-2 mb-2">
 																<label>ราคาขาย</label>
-																<input class="form-control @error('price') is-invalid @enderror"
-																		name="price"
-																		placeholder="ระบุจำนวน"
-																		type="number"
-																		value="{{ old('price') ?? '' }}">
+																<div class="input-group">
+																		<span class="input-group-text">$</span>
+																		<input class="form-control @error('price') is-invalid @enderror"
+																				name="price"
+																				placeholder="ระบุจำนวน"
+																				type="number"
+																				value="{{ old('price') ?? '' }}">
+																</div>
 																@error('price')
 																		<p class="invalid-feedback">{{ $message }}</p>
 																@enderror
@@ -72,7 +81,7 @@
 																						id="checkbox1"
 																						name="types[]"
 																						type="checkbox"
-																						value="1">
+																						value="recommand">
 																				<label class="form-check-label"
 																						for="checkbox1">สินค้าแนะนำ</label>
 																		</div>
@@ -81,7 +90,7 @@
 																						id="checkbox2"
 																						name="types[]"
 																						type="checkbox"
-																						value="2">
+																						value="new">
 																				<label class="form-check-label"
 																						for="checkbox2">สินค้าใหม่</label>
 																		</div>
@@ -90,30 +99,11 @@
 																						id="checkbox3"
 																						name="types[]"
 																						type="checkbox"
-																						value="3">
+																						value="hot">
 																				<label class="form-check-label"
 																						for="checkbox3">สินค้าที่ได้รับความนิยม</label>
 																		</div>
 																</div>
-														</div>
-														<div class="col-md-8 mb-2">
-																<label>ลิงค์เชื่อมโยง</label>
-																<input class="form-control @error('url') is-invalid @enderror"
-																		name="url"
-																		placeholder="ระบุลิงค์เชื่อมโยง"
-																		type="text"
-																		value="{{ old('url') ?? '' }}">
-														</div>
-														<div class="col-md-4 mb-2">
-																<label>การแสดง (Target)</label>
-																<select class="form-control @error('target') is-invalid @enderror"
-																		name="target">
-																		<option value="">-เลือก-</option>
-																		<option value="_parent">_parent (เปิดหน้าต่างที่เป็นหน้าต่างระดับ Parent)</option>
-																		<option value="_blank">_blank (เปิดหน้าต่างใหม่ทุกครั้ง)</option>
-																		<option value="_self">_self (เปิดหน้าต่างเดิม)</option>
-																		<option value="_top">_top (เปิดหน้าต่างในระดับบนสุด)</option>
-																</select>
 														</div>
 														<div class="col-md-12 mb-2">
 																<label>รายละเอียด</label>
@@ -125,12 +115,19 @@
 														</div>
 														<div class="col-md-12 mb-2">
 																<label>รูปภาพประกอบเพิ่มเติม</label>
-																<div class="file-loading">
+																{{-- <div class="file-loading">
 																		<input accept="image/*"
 																				class="form-control"
-																				id="input-slider"
+																				id="input-images"
 																				multiple
-																				name="slider[]"
+																				name="images[]"
+																				type="file">
+																</div> --}}
+																<div class="file-loading">
+																		<input accept="image/*"
+																				id="input-images"
+																				multiple
+																				name="images[]"
 																				type="file">
 																</div>
 														</div>
@@ -152,4 +149,32 @@
 		</div>
 @endsection
 @section('script-content')
+		<script>
+				$(".krajee-input").fileinput({
+						language: "th",
+						browseClass: "btn btn-secondary",
+						allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "webp"],
+						showPreview: false,
+						showRemove: false,
+						showUpload: false,
+				});
+
+				$(document).ready(function() {
+						$("#input-images").fileinput({
+								language: "th",
+								browseClass: "btn btn-secondary btn-block",
+								showCaption: false,
+								showRemove: false,
+								showUpload: false,
+								allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "webp"],
+								fileActionSettings: {
+										showDrag: false,
+										showZoom: true,
+										showUpload: false,
+										showDelete: true,
+								},
+								maxFileSize: 300,
+						});
+				});
+		</script>
 @endsection

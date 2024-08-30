@@ -24,7 +24,7 @@ class AuthController extends Controller
       'password' => 'required'
     ]);
 
-    return $validated;
+    // return $validated;
 
     // Attempt to log the user in
     if (Auth::attempt($request->except(['_token']))) {

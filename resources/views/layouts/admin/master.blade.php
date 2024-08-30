@@ -35,6 +35,9 @@
 		<link href="{{ asset('assets/plugins/node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}"
 				rel="stylesheet"
 				type="text/css">
+		<link href="{{ asset('assets/plugins/bootstrap-fileinput/css/fileinput.min.css') }}"
+				rel="stylesheet"
+				type="text/css">
 		@if (isset($stylesheets))
 				@foreach ($stylesheets as $stylesheet)
 						<link href="{{ $stylesheet }}"
@@ -67,6 +70,18 @@
 		<script src="{{ asset('assets/plugins/node_modules/jquery/dist/jquery.min.js') }}"></script>
 		<script src="{{ asset('assets/common/vali-theme/js/popper.min.js') }}"></script>
 		<script src="{{ asset('assets/common/vali-theme/js/bootstrap.min.js') }}"></script>
+
+
+		{{-- krejee bootstrap-fileinput --}}
+		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"
+				type="text/javascript"></script>
+		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"
+				type="text/javascript"></script>
+		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"
+				type="text/javascript"></script>
+		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/locales/th.js') }}"></script>
+
 		<script src="{{ asset('assets/common/vali-theme/js/main.min.js') }}"></script>
 
 		@if (isset($scripts))

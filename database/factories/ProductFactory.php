@@ -18,20 +18,11 @@ class ProductFactory extends Factory
    */
   public function definition(): array
   {
-    $array_products = [
-      'iPhone',
-      'iPad',
-      'Macbook',
-      'Watch',
-      'AirPods'
-    ];
-
     return [
       'code' => fake()->unique()->regexify('[A-Za-z0-9]{10}'),
       'title' => fake()->name(),
       'price_actual' => fake()->numberBetween(100, 1000),
       'price' => fake()->numberBetween(100, 1000),
-      'category' => Arr::random($array_products),
       'types' => Str::random(5),
       'detail' => fake()->text(100),
       'sort' => 1,

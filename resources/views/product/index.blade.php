@@ -54,6 +54,9 @@
 										</div>
 								@endforeach
 						</div>
+						<div class="my-5 text-center">
+								{{ $products->render() }}
+						</div>
 				</div>
 		</div>
 @endsection

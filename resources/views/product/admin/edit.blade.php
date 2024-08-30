@@ -129,9 +129,9 @@
 																<div class="file-loading">
 																		<input accept="image/*"
 																				class="form-control"
-																				id="input-slider"
+																				id="input-images"
 																				multiple
-																				name="slider[]"
+																				name="images[]"
 																				type="file">
 																</div>
 														</div>

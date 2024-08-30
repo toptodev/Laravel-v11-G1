@@ -17,8 +17,7 @@ return new class extends Migration
       $table->string('title');
       $table->float('price_actual')->nullable()->comment('ราคาจริง');
       $table->float('price')->nullable()->comment('ราคาขาย');
-      $table->string('category');
-      $table->string('types', 5)->nullable()->comment('ประเภท');
+      $table->string('types')->nullable()->comment('ประเภท');
       $table->longText('detail')->nullable()->comment('รายละเอียด');
       $table->integer('sort')->nullable();
       $table->string('cover')->nullable()->comment('ภาพหน้าปก');

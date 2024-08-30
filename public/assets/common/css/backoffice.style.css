@@ -14,3 +14,24 @@ body {
   color: #2a6cc5 !important;
   text-decoration: none !important;
 }
+
+.option-link {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+.file-drop-zone {
+  overflow: hidden;
+}
+
+.file-preview {
+  border: 2px solid #ced4da !important;
+  overflow: hidden !important;
+  border-radius: 4px;
+}
+
+.file-preview .fileinput-remove {
+  top: 5px !important;
+  right: 6px !important;
+}
