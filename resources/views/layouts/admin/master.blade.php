@@ -35,7 +35,7 @@
 		<link href="{{ asset('assets/plugins/node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}"
 				rel="stylesheet"
 				type="text/css">
-		<link href="{{ asset('assets/plugins/bootstrap-fileinput/css/fileinput.min.css') }}"
+		<link href="{{ asset('assets/plugins/node_modules/bootstrap-fileinput/css/fileinput.min.css') }}"
 				rel="stylesheet"
 				type="text/css">
 		@if (isset($stylesheets))
@@ -59,9 +59,13 @@
 		<main class="app-content">
 				<div class="app-title">
 						<div>
-								<h1>{!! $body['app_title']['h1'] ?? '' !!}</h1>
-								<p>{!! $body['app_title']['p'] ?? '' !!}</p>
+								<h1 class="fw-bold">สินค้า</h1>
+								<p>สามารถ เพิ่มและแก้ไขข้อมูลกิจกรรมได้</p>
 						</div>
+						<ul class="app-breadcrumb breadcrumb">
+								<li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+						</ul>
 				</div>
 				@yield('app-content')
 		</main>
@@ -73,14 +77,14 @@
 
 
 		{{-- krejee bootstrap-fileinput --}}
-		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"
+		<script src="{{ asset('assets/plugins/node_modules/dompurify/dist/purify.min.js') }}"
 				type="text/javascript"></script>
-		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"
+		<script src="{{ asset('assets/plugins/node_modules/bootstrap-fileinput/js/plugins/sortable.min.js') }}"
 				type="text/javascript"></script>
-		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"
+		<script src="{{ asset('assets/plugins/node_modules/bootstrap-fileinput/js/plugins/piexif.min.js') }}"
 				type="text/javascript"></script>
-		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
-		<script src="{{ asset('assets/plugins/bootstrap-fileinput/js/locales/th.js') }}"></script>
+		<script src="{{ asset('assets/plugins/node_modules/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/node_modules/bootstrap-fileinput/js/locales/th.js') }}"></script>
 
 		<script src="{{ asset('assets/common/vali-theme/js/main.min.js') }}"></script>
 

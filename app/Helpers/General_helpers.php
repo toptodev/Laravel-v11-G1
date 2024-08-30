@@ -11,3 +11,10 @@ if (!function_exists('gen_folder')) {
     return $response;
   }
 }
+
+if (!function_exists("_jsonUnescapedUnicode")) {
+  function _jsonUnescapedUnicode(array $arr)
+  {
+    return json_encode($arr, JSON_UNESCAPED_UNICODE);
+  }
+}

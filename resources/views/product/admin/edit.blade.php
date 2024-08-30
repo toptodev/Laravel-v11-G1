@@ -7,7 +7,7 @@
 								enctype="multipart/form-data"
 								method="POST">
 								@csrf
-                @method('PUT')
+								@method('PUT')
 								<div class="tile">
 										<h3 class="tile-title">แก้ไขรายการ</h3>
 										<div class="tile-body">
@@ -97,25 +97,6 @@
 																		</div>
 																</div>
 														</div>
-														<div class="col-md-8 mb-2">
-																<label>ลิงค์เชื่อมโยง</label>
-																<input class="form-control @error('url') is-invalid @enderror"
-																		name="url"
-																		placeholder="ระบุลิงค์เชื่อมโยง"
-																		type="text"
-																		value="{{ old('url') ?? $product->url }}">
-														</div>
-														<div class="col-md-4 mb-2">
-																<label>การแสดง (Target)</label>
-																<select class="form-control @error('target') is-invalid @enderror"
-																		name="target">
-																		<option value="">-เลือก-</option>
-																		<option value="_parent">_parent (เปิดหน้าต่างที่เป็นหน้าต่างระดับ Parent)</option>
-																		<option value="_blank">_blank (เปิดหน้าต่างใหม่ทุกครั้ง)</option>
-																		<option value="_self">_self (เปิดหน้าต่างเดิม)</option>
-																		<option value="_top">_top (เปิดหน้าต่างในระดับบนสุด)</option>
-																</select>
-														</div>
 														<div class="col-md-12 mb-2">
 																<label>รายละเอียด</label>
 																<textarea class="form-control @error('detail') is-invalid @enderror"
@@ -128,7 +109,6 @@
 																<label>รูปภาพประกอบเพิ่มเติม</label>
 																<div class="file-loading">
 																		<input accept="image/*"
-																				class="form-control"
 																				id="input-images"
 																				multiple
 																				name="images[]"
@@ -153,4 +133,45 @@
 		</div>
 @endsection
 @section('script-content')
+		<script>
+				$.ajaxSetup({
+						headers: {
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+				});
+
+				$(document).ready(function() {
+						$("#input-images").fileinput({
+								language: "th",
+								initialPreview: @php echo $product->initialPreview; @endphp,
+								initialPreviewAsData: true,
+								initialPreviewConfig: @php echo $product->initialPreviewConfig; @endphp,
+								deleteUrl: "@php echo route('admin.products.images-destroy', $product->id)  @endphp",
+								overwriteInitial: false,
+								initialPreviewFileType: 'image',
+								uploadAsync: false,
+								browseClass: "btn btn-secondary btn-block",
+								showCaption: false,
+								showRemove: false,
+								showUpload: false,
+								allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "webp"],
+								fileActionSettings: {
+										showDrag: true,
+										showZoom: true,
+										showUpload: false,
+										showDelete: true,
+								},
+								maxFileSize: 300,
+								purifyHtml: true,
+						}).on('filesorted', function(event, params) {
+								// console.log('File sorted ', params.previewId, params.oldIndex, params.newIndex, params.stack);
+								$.post("@php echo route('admin.products.images-sort', $product->id) @endphp", {
+										stack: params.stack
+								}, function(data, textStatus, jqXHR) {
+										console.log(data, textStatus, jqXHR);
+								}, "JSON");
+						});
+
+				});
+		</script>
 @endsection

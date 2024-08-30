@@ -74,7 +74,7 @@ class ProductController extends Controller
             ];
           }
 
-          $requestFile['name_uploaded'] = $this->ctlUploadSlider($requestFile, $product->id);
+          $requestFile['name_uploaded'] = $this->ctlUploadImages($requestFile, $product->id);
           $response[count($response)] = $requestFile;
         }
 
@@ -104,6 +104,24 @@ class ProductController extends Controller
   public function edit(string $id)
   {
     $product = Product::findOrFail($id);
+    $initialPreview = [];
+    $initialPreviewConfig = [];
+    if (!empty($product->images)) {
+      foreach ($product->images as $index => $value) {
+        $initialPreview[$index] = Storage::url('product/' . gen_folder($product->id) . '/' . $value['name_uploaded']);
+        $initialPreviewConfig[$index] = [
+          'caption' => $value["name"],
+          'size' => $value["size"],
+          'width' => "120px",
+          'key' => $index,
+          'downloadUrl' => Storage::url('product/' . gen_folder($product->id) . '/' . $value['name_uploaded'])
+        ];
+      }
+    }
+    $product->initialPreview = _jsonUnescapedUnicode($initialPreview);
+    $product->initialPreviewConfig = _jsonUnescapedUnicode($initialPreviewConfig);
+
+    // dd($product);
 
     return view('product.admin.edit', compact('product'));
   }
@@ -184,7 +202,7 @@ class ProductController extends Controller
     Storage::disk('public')->delete("$folder/resize/$file_name");
   }
 
-  public function storageSliderDelete($id, $file_name)
+  public function storageImagesDelete($id, $file_name)
   {
     $folder = strtolower('product/' . gen_folder($id));
     // $folder = strtolower(end($exp)) . '/' . gen_folder($id);
@@ -194,7 +212,7 @@ class ProductController extends Controller
   }
 
 
-  public function ctlUploadSliderOption()
+  public function ctlUploadImagesOption()
   {
     return [
       'crop' => [
@@ -205,14 +223,56 @@ class ProductController extends Controller
     ];
   }
 
-  public function ctlUploadSlider($file, $id)
+  public function ctlUploadImages($file, $id)
   {
     // $exp = explode("\\", $this->classModelName);
     // $folder = strtolower(end($exp)) . '/' . gen_folder($id);
 
     $folder = strtolower('product/' . gen_folder($id));
-    $options = $this->ctlUploadSliderOption();
+    $options = $this->ctlUploadImagesOption();
 
     return ItopCyberUpload::upload(storage_path('app/public/' . $folder), $file, $options);
+  }
+
+
+  public function imagesSort(Request $request, $id)
+  {
+    $product = Product::findOrFail($id);
+    $images = $product->images;
+
+    $response = [];
+    foreach ($request->input("stack") as $index => $value) {
+      $response[$index] = $images[$value['key']];
+    }
+
+    $product->update([
+      'images' => _jsonUnescapedUnicode($response)
+    ], $id);
+
+    return response()->json(['success' => 'updated successfully.']);
+  }
+
+  public function imagesDestroy(Request $request, $id)
+  {
+    $index = $request->input("key");
+    $product = Product::findOrFail($id);
+    $images = $product->images;
+    $file_name = $images[$index]["name_uploaded"];
+
+    // $this->repository->storageSliderDelete($id, $images[$index]["name_uploaded"]);
+    // $exp = explode("\\", $this->classModelName);
+    $folder = 'product/' . gen_folder($id);
+
+    Storage::disk('public')->delete("$folder/$file_name");
+    Storage::disk('public')->delete("$folder/crop/$file_name");
+
+    unset($images[$index]);
+
+    $response = array_values($images);
+    $product->update([
+      'images' => _jsonUnescapedUnicode($response)
+    ], $id);
+
+    return response()->json(['success' => 'updated successfully.']);
   }
 }

@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Route;
 // Admin Product Routes
 Route::prefix('admin')->name('admin.')->group(function () {
   Route::resource('products', AdminProductController::class);
+
+  Route::group([
+    'prefix' => 'products',
+    'as' => 'products.',
+  ], function () {
+    Route::controller(AdminProductController::class)->group(function () {
+      Route::post('images-sort/{id}', 'imagesSort')->name('images-sort');
+      Route::post('images-destroy/{id}', 'imagesDestroy')->name('images-destroy');
+    });
+  });
 });
 
 // Product Routes
