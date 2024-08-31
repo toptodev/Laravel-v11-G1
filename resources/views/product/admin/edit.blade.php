@@ -41,7 +41,7 @@
 																		data-msg-placeholder="เลือกไฟล์หน้าปก"
 																		name="cover"
 																		type="file">
-																<small class="form-text text-muted">ขนาดรูปภาพที่เหมาะสม 440 x 440 pixel (กว้าง x สูง)</small>
+																<small class="form-text text-muted">ขนาดรูปภาพที่เหมาะสม 600 x 400  pixel (กว้าง x สูง)</small>
 														</div>
 														<div class="col-md-2 mb-2">
 																<label>ราคาจริง</label>
@@ -69,29 +69,32 @@
 																<label>ประเภท</label>
 																<div class="d-flex justify-content-start ml-3">
 																		<div class="form-check form-check-inline">
-																				<input class="form-check-input"
+																				<input {{ in_array('recommand', $product->types) ? ' checked="checked' : '' }}
+																						class="form-check-input"
 																						id="checkbox1"
 																						name="types[]"
 																						type="checkbox"
-																						value="1">
+																						value="recommand">
 																				<label class="form-check-label"
 																						for="checkbox1">สินค้าแนะนำ</label>
 																		</div>
 																		<div class="form-check form-check-inline">
-																				<input class="form-check-input"
+																				<input {{ in_array('new', $product->types) ? ' checked="checked' : '' }}
+																						class="form-check-input"
 																						id="checkbox2"
 																						name="types[]"
 																						type="checkbox"
-																						value="2">
+																						value="new">
 																				<label class="form-check-label"
 																						for="checkbox2">สินค้าใหม่</label>
 																		</div>
 																		<div class="form-check form-check-inline">
-																				<input class="form-check-input"
+																				<input {{ in_array('hot', $product->types) ? ' checked="checked' : '' }}
+																						class="form-check-input"
 																						id="checkbox3"
 																						name="types[]"
 																						type="checkbox"
-																						value="3">
+																						value="hot">
 																				<label class="form-check-label"
 																						for="checkbox3">สินค้าที่ได้รับความนิยม</label>
 																		</div>

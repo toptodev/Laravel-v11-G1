@@ -62,7 +62,7 @@ class ProductController extends Controller
       }
 
       if (isset($request['images'])) {
-        $response = [];
+        $images = [];
         foreach ($request['images'] as $value) {
           if ($value != '') {
             $requestFile = [
@@ -75,11 +75,11 @@ class ProductController extends Controller
           }
 
           $requestFile['name_uploaded'] = $this->ctlUploadImages($requestFile, $product->id);
-          $response[count($response)] = $requestFile;
+          $images[count($images)] = $requestFile;
         }
 
         Product::where('id', $product->id)->update([
-          'images' => $response
+          'images' => $images
         ]);
       }
     }
@@ -107,6 +107,7 @@ class ProductController extends Controller
     $initialPreview = [];
     $initialPreviewConfig = [];
     if (!empty($product->images)) {
+      // dd($product->images);
       foreach ($product->images as $index => $value) {
         $initialPreview[$index] = Storage::url('product/' . gen_folder($product->id) . '/' . $value['name_uploaded']);
         $initialPreviewConfig[$index] = [
@@ -137,7 +138,6 @@ class ProductController extends Controller
         "title" => 'required|string',
         "price_actual" => 'required|string',
         "price" => 'required|string',
-
         // 'cover' => 'required|image|max:3072|mimes:jpg,jpeg,png,webp'
       ],
       [
@@ -145,14 +145,48 @@ class ProductController extends Controller
         'title.required' => 'โปรดระบุชื่อสินค้า',
         'price_actual.required' => 'โปรดระบุราคาจริง',
         'price.required' => 'โปรดระบุราคาขาย',
-
         // 'cover.required' => 'โปรดแนบรูปภาพหน้าปก',
         // 'cover.max' => 'ภาพหน้าต้องมีขนาดไม่เกิน 3 MB',
         // 'cover.mimes' => 'ภาพหน้าปกต้องมีนามสกุล *.jpg, *.jpeg, *.png',
       ]
     );
 
-    Product::findOrFail($id)->update($request->all());
+    $product = Product::findOrFail($id);
+    $cover = $product->cover;
+    $images = $product->images;
+    $product->update($request->all());
+    if ($product) {
+      if (isset($request['cover'])) {
+        $this->storageDelete($id, $cover);
+
+        Product::where('id', $product->id)->update([
+          'cover' => $this->ctlUpload($_FILES['cover'], $product->id)
+        ]);
+      }
+
+      if (isset($request['images']) && isset($request['_token'])) {
+        $response = ($images != null) ? $images : [];
+
+        foreach ($request['images'] as $value) {
+          if ($value != '') {
+            $requestFile = [
+              'name' => $value->getClientOriginalName(),
+              'type' => $value->getClientMimeType(),
+              'tmp_name' => $value->getPathName(),
+              'error' => $value->getError(),
+              'size' => $value->getSize()
+            ];
+
+            $requestFile['name_uploaded'] = $this->ctlUploadImages($requestFile, $product->id);
+            $response[count($response)] = $requestFile;
+          }
+        }
+
+        Product::where('id', $product->id)->update([
+          'images' => $response
+        ]);
+      }
+    }
 
     return redirect()->route('admin.products.index');
   }
@@ -171,7 +205,7 @@ class ProductController extends Controller
   {
     return [
       'crop' => [
-        'width' => 400,
+        'width' => 600,
         'height' => 400,
         'watermark' => ""
       ]
@@ -195,7 +229,6 @@ class ProductController extends Controller
   public function storageDelete($id, $file_name)
   {
     $folder = strtolower('product/' . gen_folder($id));
-
     Storage::disk('public')->delete("$folder/$file_name");
     Storage::disk('public')->delete("$folder/crop/$file_name");
     Storage::disk('public')->delete("$folder/thumbnail/$file_name");
@@ -205,8 +238,6 @@ class ProductController extends Controller
   public function storageImagesDelete($id, $file_name)
   {
     $folder = strtolower('product/' . gen_folder($id));
-    // $folder = strtolower(end($exp)) . '/' . gen_folder($id);
-
     Storage::disk('public')->delete("$folder/$file_name");
     Storage::disk('public')->delete("$folder/crop/$file_name");
   }
@@ -225,9 +256,6 @@ class ProductController extends Controller
 
   public function ctlUploadImages($file, $id)
   {
-    // $exp = explode("\\", $this->classModelName);
-    // $folder = strtolower(end($exp)) . '/' . gen_folder($id);
-
     $folder = strtolower('product/' . gen_folder($id));
     $options = $this->ctlUploadImagesOption();
 
@@ -238,16 +266,15 @@ class ProductController extends Controller
   public function imagesSort(Request $request, $id)
   {
     $product = Product::findOrFail($id);
-    $images = $product->images;
 
-    $response = [];
+    $images = [];
     foreach ($request->input("stack") as $index => $value) {
-      $response[$index] = $images[$value['key']];
+      $images[$index] = $product->images[$value['key']];
     }
 
     $product->update([
-      'images' => _jsonUnescapedUnicode($response)
-    ], $id);
+      'images' => $images
+    ]);
 
     return response()->json(['success' => 'updated successfully.']);
   }
@@ -259,10 +286,7 @@ class ProductController extends Controller
     $images = $product->images;
     $file_name = $images[$index]["name_uploaded"];
 
-    // $this->repository->storageSliderDelete($id, $images[$index]["name_uploaded"]);
-    // $exp = explode("\\", $this->classModelName);
     $folder = 'product/' . gen_folder($id);
-
     Storage::disk('public')->delete("$folder/$file_name");
     Storage::disk('public')->delete("$folder/crop/$file_name");
 
@@ -270,8 +294,8 @@ class ProductController extends Controller
 
     $response = array_values($images);
     $product->update([
-      'images' => _jsonUnescapedUnicode($response)
-    ], $id);
+      'images' => $response
+    ]);
 
     return response()->json(['success' => 'updated successfully.']);
   }

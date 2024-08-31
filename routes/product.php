@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Product\CartController;
+use App\Http\Controllers\Product\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
 // Admin Product Routes
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
   Route::resource('products', AdminProductController::class);
 
   Route::group([
@@ -34,6 +34,12 @@ Route::group([
   'as' => 'carts.',
 ], function () {
   Route::controller(CartController::class)->group(function () {
+    Route::get('add-to-cart/{slug}', 'addToCart')->name('addToCart');
+    Route::get('reduce/{slug}', 'reduceByOne')->name('reduceByOne');
+    Route::get('plus/{slug}', 'plusByOne')->name('plusByOne');
+    Route::get('remove/{slug}', 'removeItem')->name('removeItem');
+    Route::get('reset', 'reset')->name('reset');
+
     Route::get('/', 'index')->name('index');
     Route::get('checkout', 'checkout')->name('checkout');
     Route::post('checkout', 'save')->name('save');

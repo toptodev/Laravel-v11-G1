@@ -18,35 +18,39 @@
 														<div class="col-md-8">
 																<fieldset>
 																		<legend>รายการสั่งซื้อ</legend>
-																		<div class="row">
-																				<div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      @if (Session::has('cart'))
+                                        <ol class="p-0 pl-1">
+                                          @foreach ($items as $value)
+                                            <li class="d-flex justify-content-between border-bottom pt-1">
+                                              <span>{{ $value['qty'] }} x {{ $value['item']['title'] }}</span>
+                                              <span>{{ number_format($value['item']['price'], 2) }}</span>
+                                            </li>
+                                          @endforeach
+                                        </ol>
+                                      @else
+                                        No items in Cart!
+                                      @endif
 
-																						<ol class="p-0 pl-1">
-																								<li class="d-flex justify-content-between border-bottom pt-1">
-																										<span>1x Ex sint quis commodo minim sit quis ex non minim eu.</span>
-																										<span>200</span>
-																								</li>
-
-																						</ol>
-
-																						<div class="py-4">
-																								<div class="d-flex justify-content-between">
-																										<div>รวมเงิน</div>
-																										<div>200</div>
-																								</div>
-																								<div class="d-flex justify-content-between">
-																										<div>ค่าจัดส่ง</div>
-																										<div>200</div>
-																								</div>
-																								<div class="d-flex justify-content-between">
-																										<div class="font-weight-bold text-middle">ยอดที่ต้องชำระ</div>
-																										<div class="font-x-large font-weight-bold">
-																												200
-																										</div>
-																								</div>
-																						</div>
-																				</div>
-																		</div>
+                                      <div class="py-4">
+                                        <div class="d-flex justify-content-between">
+                                          <div>รวมเงิน</div>
+                                          <div>{{ number_format($totalPrice, 2) }}</div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                          <div>ค่าจัดส่ง</div>
+                                          <div>{{ number_format($shoppingCost, 2) }}</div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                          <div class="font-weight-bold text-middle">ยอดที่ต้องชำระ</div>
+                                          <div class="font-x-large font-weight-bold">
+                                            {{ number_format($totalPrice + $shoppingCost, 2) }}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
 																</fieldset>
 														</div>
 														<div class="col-md-8">
@@ -56,7 +60,7 @@
 																				<div class="col-6">
 																						<label class="form-label">ชื่อจริง *</label>
 																						<input class="form-control @error('name') is-invalid @enderror"
-																								name="name"
+														{{----}}										name="name"
 																								placeholder="ชื่อจริง"
 																								type="text">
 																						@error('name')

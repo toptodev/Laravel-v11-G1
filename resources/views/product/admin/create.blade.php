@@ -40,7 +40,7 @@
 																		data-msg-placeholder="เลือกไฟล์หน้าปก"
 																		name="cover"
 																		type="file">
-																<small class="form-text text-muted">ขนาดรูปภาพที่เหมาะสม 440 x 440 pixel (กว้าง x สูง)</small>
+																<small class="form-text text-muted">ขนาดรูปภาพที่เหมาะสม 600 x 400 pixel (กว้าง x สูง)</small>
 																@error('cover')
 																		<p class="invalid-feedback">{{ $message }}</p>
 																@enderror
@@ -115,14 +115,6 @@
 														</div>
 														<div class="col-md-12 mb-2">
 																<label>รูปภาพประกอบเพิ่มเติม</label>
-																{{-- <div class="file-loading">
-																		<input accept="image/*"
-																				class="form-control"
-																				id="input-images"
-																				multiple
-																				name="images[]"
-																				type="file">
-																</div> --}}
 																<div class="file-loading">
 																		<input accept="image/*"
 																				id="input-images"
