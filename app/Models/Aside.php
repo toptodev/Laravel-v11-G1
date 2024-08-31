@@ -25,7 +25,7 @@ class Aside
             'webfont_icon' => '<i class="app-menu__icon fab fa-product-hunt"></i>'
           ],
           [
-            'name' => 'รายการสั่งชื้อ',
+            'name' => 'สั่งชื้อ',
             'active_name' => "admin/orders*",
             'url' => route('admin.orders.index'),
             'webfont_icon' => '<i class="app-menu__icon fas fa-basket-shopping"></i>'

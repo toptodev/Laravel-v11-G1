@@ -52,7 +52,7 @@
 												placeholder="ระบุชื่อผู้ใช้งาน"
 												required
 												type="text"
-												value="{{ old('username') ?? 'superadmin' }}">
+												value="{{ old('username') ?? 'admin' }}">
 								</div>
 								<div class="mb-3">
 										<label class="form-label">รหัสผ่าน</label>

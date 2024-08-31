@@ -31,6 +31,29 @@ class Order extends Model
     'payment' => Json::class,
   ];
 
+  protected static function boot()
+  {
+    parent::boot();
+
+    static::creating(function ($model) {
+      $prefixYear = date("Y");
+      $prefixMonth = date("m");
+      $prefixMonth = sprintf("%02d", $prefixMonth);
+      $prefixSequent = self::sequent($prefixYear, $prefixMonth)->first();
+      $prefixYear = (int)substr($prefixYear + 543, -2);
+
+      $model->code = _genNoIndex("QT{$prefixYear}{$prefixMonth}", (int)$prefixSequent->count, 4);
+    });
+  }
+
+
+  function scopeSequent($query, $prefixYear, $prefixMonth)
+  {
+    return $query->selectRaw('(count(id)+1) as count')
+      ->whereRaw("DATE_FORMAT(created_at,'%Y-%m') = '{$prefixYear}-$prefixMonth'")
+      ->withTrashed();
+  }
+
   // protected function items(): Attribute
   // {
   //   return Attribute::make(

@@ -18,3 +18,10 @@ if (!function_exists("_jsonUnescapedUnicode")) {
     return json_encode($arr, JSON_UNESCAPED_UNICODE);
   }
 }
+
+if (!function_exists("_genNoIndex")) {
+  function _genNoIndex($prefixed = "", $number = "", $decimal = 4): string
+  {
+    return $prefixed . sprintf("%0{$decimal}d", $number);
+  }
+}
