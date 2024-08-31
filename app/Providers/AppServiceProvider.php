@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Aside;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -38,10 +39,21 @@ class AppServiceProvider extends ServiceProvider
   private function getViewComposer()
   {
 
-    View::composer(['layouts.admin.aside'], function ($view) {
+    View::composer(['layouts.admin.aside', 'layouts.master'], function ($view) {
       $cacheNavigation = Aside::getNavigationSidebar();
 
       return $view->with(compact('cacheNavigation'));
+    });
+
+    View::composer(['layouts.master'], function ($view) {
+      if (Session::has('cart')) {
+        $oldCart = Session::get('cart');
+        $countCart =  count($oldCart->items);
+      } else {
+        $countCart = 0;
+      }
+
+      return $view->with(compact('countCart'));
     });
   }
 }

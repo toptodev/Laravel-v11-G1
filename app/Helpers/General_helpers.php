@@ -25,3 +25,17 @@ if (!function_exists("_genNoIndex")) {
     return $prefixed . sprintf("%0{$decimal}d", $number);
   }
 }
+
+if (!function_exists('_fileExists')) {
+  function _fileExists($folder = '', $string = ''): bool
+  {
+    return (($string != "") && \Storage::disk('public')->exists("/$folder/$string"));
+  }
+}
+
+if (!function_exists('__via_placeholder')) {
+  function __via_placeholder($width, $height)
+  {
+    return "https://via.placeholder.com/{$width}x{$height}.png?text={$width}x{$height}";
+  }
+}

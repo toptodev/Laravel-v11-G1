@@ -42,7 +42,7 @@ class Order extends Model
       $prefixSequent = self::sequent($prefixYear, $prefixMonth)->first();
       $prefixYear = (int)substr($prefixYear + 543, -2);
 
-      $model->code = _genNoIndex("QT{$prefixYear}{$prefixMonth}", (int)$prefixSequent->count, 4);
+      $model->code = _genNoIndex("IV{$prefixYear}{$prefixMonth}", (int)$prefixSequent->count, 4);
     });
   }
 

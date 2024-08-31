@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+  private function render(string $view, array $params = [])
+  {
+    $params['page_title'] = "สินค้า";
+    $params['page_subtitle'] = "สามารถ เพิ่มและแก้ไขข้อมูลสินค้าได้";
+
+    return view($view, $params);
+  }
+
   /**
    * Display a listing of the resource.
    */
@@ -17,7 +25,7 @@ class ProductController extends Controller
   {
     $products = Product::orderByDesc('id')->paginate(20);
 
-    return view('product.admin.index', compact('products'));
+    return $this->render('product.admin.index', compact('products'));
   }
 
   /**
@@ -25,7 +33,7 @@ class ProductController extends Controller
    */
   public function create()
   {
-    return view('product.admin.create');
+    return $this->render('product.admin.create');
   }
 
   /**
@@ -95,7 +103,7 @@ class ProductController extends Controller
   {
     $product = Product::findOrFail($id);
 
-    return view('product.admin.show', compact('product'));
+    return $this->render('product.admin.show', compact('product'));
   }
 
   /**
@@ -107,7 +115,6 @@ class ProductController extends Controller
     $initialPreview = [];
     $initialPreviewConfig = [];
     if (!empty($product->images)) {
-      // dd($product->images);
       foreach ($product->images as $index => $value) {
         $initialPreview[$index] = Storage::url('product/' . gen_folder($product->id) . '/' . $value['name_uploaded']);
         $initialPreviewConfig[$index] = [
@@ -122,9 +129,7 @@ class ProductController extends Controller
     $product->initialPreview = _jsonUnescapedUnicode($initialPreview);
     $product->initialPreviewConfig = _jsonUnescapedUnicode($initialPreviewConfig);
 
-    // dd($product);
-
-    return view('product.admin.edit', compact('product'));
+    return $this->render('product.admin.edit', compact('product'));
   }
 
   /**
@@ -215,7 +220,6 @@ class ProductController extends Controller
   public function ctlUpload($file, $id)
   {
     $folder = strtolower('product/' . gen_folder($id));
-
     $options = $this->ctlUploadOption();
 
     return ItopCyberUpload::upload(storage_path('app/public/' . $folder), $file, $options);
@@ -242,7 +246,6 @@ class ProductController extends Controller
     Storage::disk('public')->delete("$folder/crop/$file_name");
   }
 
-
   public function ctlUploadImagesOption()
   {
     return [
@@ -261,7 +264,6 @@ class ProductController extends Controller
 
     return ItopCyberUpload::upload(storage_path('app/public/' . $folder), $file, $options);
   }
-
 
   public function imagesSort(Request $request, $id)
   {

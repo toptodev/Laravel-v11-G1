@@ -4,7 +4,6 @@ use App\Http\Controllers\Product\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
 
-// Admin Product Routes
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
   Route::resource('orders', OrderController::class);
 
@@ -13,7 +12,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
    'as' => 'orders.',
   ], function () {
    Route::controller(OrderController::class)->group(function () {
-     Route::post('status/{id}/{status}', 'status')->name('status');
+     Route::get('status/{id}/{status}', 'status')->name('status');
    });
   });
 });

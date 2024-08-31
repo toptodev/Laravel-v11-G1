@@ -5,34 +5,22 @@
 				<div class="carousel slide"
 						id="carouselExampleIndicators">
 						<div class="carousel-indicators">
-								<button aria-current="true"
-										aria-label="Slide 1"
-										class="active"
-										data-bs-slide-to="0"
-										data-bs-target="#carouselExampleIndicators"
-										type="button"></button>
-								<button aria-label="Slide 2"
-										data-bs-slide-to="1"
-										data-bs-target="#carouselExampleIndicators"
-										type="button"></button>
-								<button aria-label="Slide 3"
-										data-bs-slide-to="2"
-										data-bs-target="#carouselExampleIndicators"
-										type="button"></button>
+								@foreach ($banners as $index => $banner)
+										<button aria-current="{{ $index == 0 ? true : false }}"
+												aria-label="{{ $banner->title }}"
+												class="{{ $index == 0 ? 'active' : '' }}"
+												data-bs-slide-to="{{ $index }}"
+												data-bs-target="#carouselExampleIndicators"
+												type="button"></button>
+								@endforeach
 						</div>
 						<div class="carousel-inner">
-								<div class="carousel-item active">
-										<img class="d-block w-100"
-												src="https://picsum.photos/1920/476">
-								</div>
-								<div class="carousel-item">
-										<img class="d-block w-100"
-												src="https://picsum.photos/1920/476">
-								</div>
-								<div class="carousel-item">
-										<img class="d-block w-100"
-												src="https://picsum.photos/1920/476">
-								</div>
+								@foreach ($banners as $banner)
+										<div class="carousel-item active">
+												<img class="d-block w-100"
+														src="{{ $banner->cover }}">
+										</div>
+								@endforeach
 						</div>
 						<button class="carousel-control-prev"
 								data-bs-slide="prev"
@@ -102,7 +90,7 @@
 												<div class="card product-box shadow-sm">
 														<img alt="{{ Request::getHost() }}"
 																class="img-fluid"
-																src="https://placehold.co/600x400">
+																src="{{ $product->cover }}">
 														<div class="card-body">
 																<div class="card-title fw-bolder">
 																		<a class="text-decoration-none text-dark"
@@ -111,7 +99,13 @@
 																		</a>
 																</div>
 																<p class="card-text">
-																		<small class="badge fw-light rounded-pill bg-success p-1">สินค้าแนะนำ</small>
+																		@if ($product->types)
+																				@foreach ($product->types as $type)
+																						{!! $type == 'recommand' ? '<small class="badge fw-light rounded-pill bg-info p-1">สินค้าแนะนำ</small>' : '' !!}
+																						{!! $type == 'new' ? '<small class="badge fw-light rounded-pill bg-danger p-1">สินค้าใหม่</small>' : '' !!}
+																						{!! $type == 'hot' ? '<small class="badge fw-light rounded-pill bg-success p-1">สินค้าที่ได้รับความนิยม</small>' : '' !!}
+																				@endforeach
+																		@endif
 																</p>
 																<div class="d-flex justify-content-between align-items-center">
 																		<div class="text-price">
@@ -119,7 +113,7 @@
 																				<del class="text-danger">฿{{ number_format($product->price_actual) }} </del>
 																		</div>
 																		<a class="btn btn-sm btn-outline-primary"
-																				href="#">
+																				href="{{ route('carts.addToCart', $product->id) }}">
 																				<i class="fas fa-cart-plus"></i>
 																		</a>
 																</div>

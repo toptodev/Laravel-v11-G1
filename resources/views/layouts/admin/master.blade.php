@@ -59,8 +59,10 @@
 		<main class="app-content">
 				<div class="app-title">
 						<div>
-								<h1 class="fw-bold">สินค้า</h1>
-								<p>สามารถ เพิ่มและแก้ไขข้อมูลกิจกรรมได้</p>
+								{{-- <h1 class="fw-bold">สินค้า</h1>
+								<p>สามารถ เพิ่มและแก้ไขข้อมูลกิจกรรมได้</p> --}}
+								<h1 class="fw-bold">{{ $page_title ?? '' }}</h1>
+								<p>{{ $page_subtitle ?? '' }}</p>
 						</div>
 						<ul class="app-breadcrumb breadcrumb">
 								<li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>

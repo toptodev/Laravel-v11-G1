@@ -19,6 +19,12 @@ class Aside
           //   'webfont_icon' => '<i class="app-menu__icon fas fa-dashboard"></i>'
           // ],
           [
+            'name' => 'แบนเนอร์',
+            'active_name' => "admin/banners*",
+            'url' => route('admin.banners.index'),
+            'webfont_icon' => '<i class="app-menu__icon fas fa-panorama"></i>'
+          ],
+          [
             'name' => 'สินค้า',
             'active_name' => "admin/products*",
             'url' => route('admin.products.index'),

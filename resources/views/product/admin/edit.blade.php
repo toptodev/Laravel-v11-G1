@@ -9,7 +9,7 @@
 								@csrf
 								@method('PUT')
 								<div class="tile">
-										<h3 class="tile-title">แก้ไขรายการ</h3>
+										<h3 class="tile-title">ดูรายการ</h3>
 										<div class="tile-body">
 												<div class="row g-3 needs-validation">
 														<div class="col-md-3 mb-2">

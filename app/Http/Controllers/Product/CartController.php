@@ -53,6 +53,7 @@ class CartController extends Controller
   public function addToCart(Request $request, $id)
   {
     $product = Product::findOrFail($id);
+
     $oldCart = Session::has('cart') ? Session::get('cart') : null;
     $cart = new Cart($oldCart);
     $cart->add($product->getAttributes(), $product->id);
@@ -130,17 +131,19 @@ class CartController extends Controller
       return redirect()->back()->withErrors($validator)->withInput();
     }
 
-
     $oldCart = Session::get('cart');
     $request->request->add([
       'items' =>  $oldCart->items,
       'shipping_cost' => $oldCart->shoppingCost,
       'amount' => $oldCart->totalPrice,
     ]);
-    //dd($request->all());
+
     $result =  Order::create($request->all());
     if ($result) {
-      //Session::forget('cart');
+      Session::forget('cart');
+
+      // send mail
+      // line notify
     }
 
     return redirect()->route('carts.success');

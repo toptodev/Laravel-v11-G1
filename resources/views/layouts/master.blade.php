@@ -226,13 +226,19 @@
 																href="#">Pricing</a>
 												</li>
 												<li class="nav-item">
-														<a class="nav-link"
+														<a class="nav-link position-relative"
 																href="{{ route('carts.index') }}">
 																<svg class="bi"
 																		height="24"
 																		width="24">
 																		<use xlink:href="#cart" />
 																</svg>
+																@if (Session::has('cart'))
+																		<span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger top-2">
+																				{{ $countCart }}
+																				<span class="visually-hidden">unread messages</span>
+																		</span>
+																@endif
 														</a>
 												</li>
 										</ul>
@@ -246,7 +252,7 @@
 		</main>
 
 		{{-- footer --}}
-		<footer class="container py-5 mt-5 border-top">
+		<footer class="border-top container mt-5 py-5">
 				<div class="row">
 						<div class="col-12 col-md">
 								<svg class="d-block mb-2"

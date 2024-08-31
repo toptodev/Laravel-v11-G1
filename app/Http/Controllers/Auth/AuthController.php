@@ -9,7 +9,6 @@ use Auth;
 
 class AuthController extends Controller
 {
-  // use AuthenticatesUsers;
 
   public function __construct() {}
 
@@ -28,7 +27,6 @@ class AuthController extends Controller
 
     // Attempt to log the user in
     if (Auth::attempt($request->except(['_token']))) {
-      // dd(Auth::user());
 
       // if successful, then redirect to their intended location
       return redirect()->intended(route('admin.products.index'));
